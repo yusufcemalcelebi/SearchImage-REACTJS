@@ -11,10 +11,11 @@ class App extends React.Component {
         this.state = {
             queryKeyword: '',
             optionSelection: '',
-            resultList: [],
+            apiResponse: [],
             location: props.location
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
     }
 
     handleChange(event) {
@@ -25,18 +26,43 @@ class App extends React.Component {
         })
     }
 
-    handleAPI(resultList) {
-        this.setState({
-            resultList: resultList
+    handleSearch() {
+        const endPointUrl =
+            "https://api.unsplash.com/search/photos?query=" + encodeURIComponent(this.state.queryKeyword) +
+            "&collections=" + this.state.optionSelection + "&page=1";
+
+        console.log(endPointUrl)
+
+        fetch(endPointUrl, {
+            'method': 'get',
+            'Accept-Version': 'v1',
+            headers: new Headers({
+                'Authorization': 'Client-ID ef0777b2d8ae3f437cc7b389231aee62e5c5710f8c43cbc144f26771e0d62708',
+            }),
         })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data.results)
+                this.setState({
+                    apiResponse: data.results
+                })
+            })
+    }
+
+    getImageUrls() {
+        let imagesWithIds = []
+        imagesWithIds = this.state.apiResponse.map((image, index) => {
+            return {
+                id: image.id,
+                imgUrl: image.urls.small
+            }
+        })
+
+        return imagesWithIds
     }
 
     render() {
-        const search = {
-            queryKeyword: this.state.queryKeyword,
-            optionSelection: this.state.optionSelection
-        }
-
+        let imagesWithIds = this.getImageUrls()
         return (
             <Router>
                 <div>
@@ -45,15 +71,24 @@ class App extends React.Component {
                             exact path="/"
                             render={(props) => <MainPage {...props}
                                 handleChange={this.handleChange}
-                                values={search}
+                                handleSearch={this.handleSearch}
+                                values={{
+                                    queryKeyword: this.state.queryKeyword,
+                                    optionSelection: this.state.optionSelection
+                                }}
                             />}
                         />
                         <Route
                             path="/search"
                             render={(props) => <SearchPage {...props}
                                 handleChange={this.handleChange}
-                                values={search}
-                                resultList={this.state.resultList}
+                                values={{
+                                    queryKeyword: this.state.queryKeyword,
+                                    optionSelection: this.state.optionSelection
+                                }}
+                                imagesWithIds={imagesWithIds}
+                                handleSearch={this.handleSearch}
+
                             />}
                         />
                     </Switch>

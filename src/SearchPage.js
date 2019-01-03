@@ -1,51 +1,39 @@
 import React from "react"
+import { Link } from "react-router-dom";
+
 import SearchBar from "./components/SearchBar"
+import mainIcon from './images/icon.png';
 
-class SearchPage extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            handleChange: props.handleChange,
-            values: props.values,
-            resultList: props.resultList
-        }
+function SearchPage(props) {
+    const textFields = {
+        options: ["Animals", "Breakfast", "Christmas", "Office Life", "Halloween"],
+        ids: [181581, 1454032, 1143269, 1895329, 395888],
+        buttonText: "SEARCH"
     }
 
-    componentDidMount() {
-        // Need to add Authorization Header with access key 
-        // 
-        fetch("https://api.unsplash.com/photos?page=1&query=horses  /", {
-            'method': 'get',
-            'Accept-Version': 'v1',
-            headers: new Headers({
-                'Authorization': 'Client-ID ef0777b2d8ae3f437cc7b389231aee62e5c5710f8c43cbc144f26771e0d62708',
-            }),
-        })
-            .then(response => response.json())
-            .then((data) => console.log(data))
-    }
+    const imageList = props.imagesWithIds.map((image) =>
+        <div className="brick" key={image.id}>
+            <img src={image.imgUrl} alt="result" />
+        </div>)
 
-    render() {
-        const textFields = {
-            options: ["View", "Car", "Horses"],
-            buttonText: "SEARCH"
-        }
-
-        return (
+    return (
+        <div>
             <div className="search-header">
-                <div
-                    className="main-icon"
-                    src="images/icon.png"
-                    alt="" />
+                <Link to="/" className="main-icon">
+                    <img src={mainIcon} alt="" />
+                </Link>
                 <SearchBar
                     textFields={textFields}
-                    handleChange={this.state.handleChange}
-                    search={this.state.values} />
+                    handleChange={props.handleChange}
+                    handleSearch={props.handleSearch}
+                    values={props.values}
+                    imagesWithIds={props.imagesWithIds} />
             </div>
-        )
-    }
+            <div className="masonry">
+                {imageList}
+            </div>
+        </div >
+    )
 }
-
 
 export default SearchPage

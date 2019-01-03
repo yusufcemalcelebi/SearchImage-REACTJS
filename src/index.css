@@ -5,6 +5,10 @@ button:focus {
     outline: none;
 }
 
+input {
+    color: gray;
+}
+
 body {
     margin: 0px;
 }
@@ -36,6 +40,14 @@ body {
     background: linear-gradient(333.23deg, #2A2B8D -16.84%, #2B2F8F -12.31%, #559BD1 119.72%);
     border-radius: 26px;
     margin-bottom: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.main-icon img {
+    width: 50%;
 }
 
 .main-title {
@@ -56,10 +68,11 @@ body {
 
 .main-page .input-field {
     height: 18%;
-    width: 50%;
+    width: 60%;
     border-radius: 4px;
     text-indent: 10px;
     padding: 0px;
+    border: none;
 }
 
 .main-page .query-input {
@@ -88,15 +101,15 @@ select {
 .main-page .search-button {
     text-align: center;
     background-color: #2A2B8D;
-    width: 40%;
-    height: 20%;
+    width: 38%;
+    height: 17%;
     border-radius: 25px;
     border: none;
     cursor: pointer;
-    margin-top: 5vh;
+    margin-top: 8vh;
     color: white;
     font-size: 1.8vh;
-    line-height: 50px;
+    line-height: 38px;
     letter-spacing: 0.1em;
     font-family: 'Open Sans', sans-serif;
     text-decoration: none;
@@ -141,6 +154,7 @@ select {
     border-radius: 4px;
     text-indent: 10px;
     padding: 0px;
+    border: none;
 }
 
 .search-header .search-bar {
@@ -158,4 +172,56 @@ select {
     background: linear-gradient(333.23deg, #2A2B8D -16.84%, #2B2F8F -12.31%, #559BD1 119.72%);
     border-radius: 26px;
     margin-bottom: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* The Masonry Container */
+.masonry {
+    margin: 1.5em auto;
+    max-width: 1000px;
+    column-gap: 1.5em;
+}
+
+/* The Masonry Brick */
+.brick {
+    background: #fff;
+    margin: 0 0 1.5em;
+}
+
+.brick img {
+    max-width: 100%
+}
+
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+    .masonry {
+        column-count: 4;
+    }
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+    .masonry {
+        column-count: 3;
+    }
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+    .masonry {
+        column-count: 2;
+    }
 }

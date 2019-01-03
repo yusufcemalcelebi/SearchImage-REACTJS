@@ -7,12 +7,12 @@ function SearchBar(props) {
     const textFields = props.textFields
     const options = textFields.options
         .map((option, index) =>
-            <option value={option} key={index}>{option}</option>)
+            <option value={textFields.ids[index]} key={index}>{option}</option>)
 
     return (
         <div className="search-bar">
             <input
-                value={props.search.queryKeyword}
+                value={props.values.queryKeyword}
                 onChange={props.handleChange}
                 type="text"
                 name="queryKeyword"
@@ -21,7 +21,7 @@ function SearchBar(props) {
             </input>
 
             <select
-                value={props.search.optionSelection}
+                value={props.values.optionSelection}
                 onChange={props.handleChange}
                 name="optionSelection"
                 className="dropdown-selection input-field">
@@ -30,7 +30,7 @@ function SearchBar(props) {
 
             <Link
                 to="/search"
-                onClick={() => console.log('hi')}
+                onClick={props.handleSearch}
                 className="search-button">{textFields.buttonText}
             </Link>
         </div>
