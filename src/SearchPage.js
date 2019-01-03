@@ -12,12 +12,33 @@ function SearchPage(props) {
     }
 
     const imageList = props.imagesWithIds.map((image) =>
-        <div className="brick" key={image.id}>
+        <div className="brick" key={image.id} onClick={() => props.handleImageClick(image.id)}>
             <img src={image.imgUrl} alt="result" />
-        </div>)
+        </div >)
+
+    let createModalPopup = () => {
+        console.log(props.clickedImageInfo.info)
+        return props.clickedImageInfo.visibility ?
+            <div>
+                <div className="overlay" onClick={() => {
+                    props.handleOverlayClick()
+                }} />
+                <div className="clicked-image-modal" >
+                    <img src={props.clickedImageInfo.info.urls.small} alt="result" />
+                    <div className="info-row" >
+                        <img src={props.clickedImageInfo.info.user.profile_image.medium} alt="" />
+                        <div className="name-wrapper">
+                            <span className="user-firstname">{props.clickedImageInfo.info.user.first_name}</span>
+                            <span className="user-username">@{props.clickedImageInfo.info.user.username}</span>
+                        </div>
+                    </div>
+                </div>
+            </div> : ''
+    }
 
     return (
         <div>
+            {createModalPopup()}
             <div className="search-header">
                 <Link to="/" className="main-icon">
                     <img src={mainIcon} alt="" />

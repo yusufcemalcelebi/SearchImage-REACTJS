@@ -11,11 +11,18 @@ class App extends React.Component {
         this.state = {
             queryKeyword: '',
             optionSelection: '',
+            clickedImageInfo: {
+                visibility: false,
+                info: {}
+            },
             apiResponse: [],
             location: props.location
         }
+
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.handleImageClick = this.handleImageClick.bind(this)
+        this.handleOverlayClick = this.handleOverlayClick.bind(this)
     }
 
     handleChange(event) {
@@ -31,8 +38,6 @@ class App extends React.Component {
             "https://api.unsplash.com/search/photos?query=" + encodeURIComponent(this.state.queryKeyword) +
             "&collections=" + this.state.optionSelection + "&page=1";
 
-        console.log(endPointUrl)
-
         fetch(endPointUrl, {
             'method': 'get',
             'Accept-Version': 'v1',
@@ -42,11 +47,30 @@ class App extends React.Component {
         })
             .then(response => response.json())
             .then((data) => {
-                console.log(data.results)
                 this.setState({
                     apiResponse: data.results
                 })
             })
+    }
+
+    handleImageClick(id) {
+        let clickedImageInfo = this.state.apiResponse.find(image => image.id === id)
+
+        this.setState({
+            clickedImageInfo: {
+                visibility: true,
+                info: clickedImageInfo
+            }
+        })
+    }
+
+    handleOverlayClick() {
+        this.setState(prevState => ({
+            clickedImageInfo: {
+                visibility: false,
+                info: prevState.clickedImageInfo.info
+            }
+        }))
     }
 
     getImageUrls() {
@@ -82,13 +106,15 @@ class App extends React.Component {
                             path="/search"
                             render={(props) => <SearchPage {...props}
                                 handleChange={this.handleChange}
+                                handleSearch={this.handleSearch}
+                                handleImageClick={this.handleImageClick}
+                                handleOverlayClick={this.handleOverlayClick}
                                 values={{
                                     queryKeyword: this.state.queryKeyword,
                                     optionSelection: this.state.optionSelection
                                 }}
                                 imagesWithIds={imagesWithIds}
-                                handleSearch={this.handleSearch}
-
+                                clickedImageInfo={this.state.clickedImageInfo}
                             />}
                         />
                     </Switch>

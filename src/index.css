@@ -5,6 +5,10 @@ button:focus {
     outline: none;
 }
 
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
 input {
     color: gray;
 }
@@ -54,7 +58,6 @@ body {
     color: white;
     font-weight: 100;
     font-size: 3.2vh;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .main-page .search-bar {
@@ -85,8 +88,7 @@ body {
 }
 
 select>option {
-    width: 50%;
-    border-radius: 15px;
+    font-size: 14px;
 }
 
 .dropdown-selection select {
@@ -99,7 +101,9 @@ select {
 }
 
 .main-page .search-button {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #2A2B8D;
     width: 38%;
     height: 17%;
@@ -109,9 +113,7 @@ select {
     margin-top: 8vh;
     color: white;
     font-size: 1.8vh;
-    line-height: 38px;
     letter-spacing: 0.1em;
-    font-family: 'Open Sans', sans-serif;
     text-decoration: none;
 }
 
@@ -124,18 +126,17 @@ select {
 }
 
 .search-header .search-button {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #2A2B8D;
     width: 20%;
     height: 40%;
     border-radius: 25px;
-    border: none;
     cursor: pointer;
     color: white;
     font-size: 1.8vh;
-    line-height: 45px;
     letter-spacing: 0.1em;
-    font-family: 'Open Sans', sans-serif;
     text-decoration: none;
 }
 
@@ -191,7 +192,7 @@ html {
 /* The Masonry Container */
 .masonry {
     margin: 1.5em auto;
-    max-width: 1000px;
+    max-width: 65%;
     column-gap: 1.5em;
 }
 
@@ -201,21 +202,28 @@ html {
     margin: 0 0 1.5em;
 }
 
+.brick:hover img {
+    opacity: .75;
+}
+
 .brick img {
-    max-width: 100%
+    max-width: 100%;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    backface-visibility: hidden;
 }
 
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
     .masonry {
-        column-count: 4;
+        column-count: 3;
     }
 }
 
 /* Masonry on medium-sized screens */
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
     .masonry {
-        column-count: 3;
+        column-count: 2;
     }
 }
 
@@ -224,4 +232,66 @@ html {
     .masonry {
         column-count: 2;
     }
+}
+
+.clicked-image-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: fixed;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: white;
+    z-index: 1;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.clicked-image-modal>img {
+    width: 100%;
+    max-height: 70vh;
+}
+
+.info-row {
+    width: 100%;
+    height: 5vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+.info-row img {
+    border-radius: 60px;
+}
+
+.info-row .user-firstname {
+    font-weight: bold;
+    font-size: 2.5vh;
+}
+
+.info-row .user-username {
+    font-size: 2vh;
+    font-weight: bold;
+    color: #2A2B8D;
+}
+
+.info-row .name-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.3;
 }

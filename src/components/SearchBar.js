@@ -15,9 +15,11 @@ function SearchBar(props) {
                 value={props.values.queryKeyword}
                 onChange={props.handleChange}
                 type="text"
+                spellCheck="false"
+                autoComplete="off"
                 name="queryKeyword"
                 className="query-input input-field"
-                placeholder="keyword">
+                placeholder="Query">
             </input>
 
             <select
@@ -25,6 +27,7 @@ function SearchBar(props) {
                 onChange={props.handleChange}
                 name="optionSelection"
                 className="dropdown-selection input-field">
+                <option value="" hidden>Collections</option>
                 {options}
             </select>
 
