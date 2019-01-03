@@ -1,14 +1,161 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+    margin: 0px;
+}
+
+.main-page {
+    width: 100%;
+    height: 100%;
+    background-color: #050417;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page .search-design {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 33%;
+    height: 50%;
+    min-width: 550px;
+    min-height: 450px;
+}
+
+.main-page .main-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(333.23deg, #2A2B8D -16.84%, #2B2F8F -12.31%, #559BD1 119.72%);
+    border-radius: 26px;
+    margin-bottom: 1vh;
+}
+
+.main-title {
+    color: white;
+    font-weight: 100;
+    font-size: 3.2vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-page .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 50%
+}
+
+.main-page .input-field {
+    height: 18%;
+    width: 50%;
+    border-radius: 4px;
+    text-indent: 10px;
+    padding: 0px;
+}
+
+.main-page .query-input {
+    margin-top: 5vh;
+}
+
+.main-page .dropdown-selection {
+    box-shadow: 0px 8px 1px -5px rgb(185, 167, 185);
+    margin-top: 2vh;
+}
+
+select>option {
+    width: 50%;
+    border-radius: 15px;
+}
+
+.dropdown-selection select {
+    display: none;
+    color: gray;
+}
+
+select {
+    color: gray;
+}
+
+.main-page .search-button {
+    text-align: center;
+    background-color: #2A2B8D;
+    width: 40%;
+    height: 20%;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 5vh;
+    color: white;
+    font-size: 1.8vh;
+    line-height: 50px;
+    letter-spacing: 0.1em;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+}
+
+.search-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 17vh;
+    background-color: #050417;
+}
+
+.search-header .search-button {
+    text-align: center;
+    background-color: #2A2B8D;
+    width: 20%;
+    height: 40%;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.8vh;
+    line-height: 45px;
+    letter-spacing: 0.1em;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+}
+
+.search-header .dropdown-selection {
+    box-shadow: 0px 8px 1px -5px rgb(185, 167, 185);
+    /* margin-top: 2vh; */
+}
+
+.search-header .query-input {
+    /* margin-top: 5vh; */
+}
+
+.search-header .input-field {
+    height: 40%;
+    width: 32%;
+    border-radius: 4px;
+    text-indent: 10px;
+    padding: 0px;
+}
+
+.search-header .search-bar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    width: 80%;
+    height: 100%;
+}
+
+.search-header .main-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(333.23deg, #2A2B8D -16.84%, #2B2F8F -12.31%, #559BD1 119.72%);
+    border-radius: 26px;
+    margin-bottom: 1vh;
 }

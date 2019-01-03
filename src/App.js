@@ -1,28 +1,66 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { BrowserRouter as Router } from "react-router-dom"
+import { Switch, Route } from "react-router-dom";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import MainPage from "./MainPage"
+import SearchPage from "./SearchPage";
+
+class App extends React.Component {
+    constructor(props) {
+        super()
+        this.state = {
+            queryKeyword: '',
+            optionSelection: '',
+            resultList: [],
+            location: props.location
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleAPI(resultList) {
+        this.setState({
+            resultList: resultList
+        })
+    }
+
+    render() {
+        const search = {
+            queryKeyword: this.state.queryKeyword,
+            optionSelection: this.state.optionSelection
+        }
+
+        return (
+            <Router>
+                <div>
+                    <Switch location={this.state.location}>
+                        <Route
+                            exact path="/"
+                            render={(props) => <MainPage {...props}
+                                handleChange={this.handleChange}
+                                values={search}
+                            />}
+                        />
+                        <Route
+                            path="/search"
+                            render={(props) => <SearchPage {...props}
+                                handleChange={this.handleChange}
+                                values={search}
+                                resultList={this.state.resultList}
+                            />}
+                        />
+                    </Switch>
+                </div>
+            </Router>
+        )
+    }
 }
 
-export default App;
+export default App
