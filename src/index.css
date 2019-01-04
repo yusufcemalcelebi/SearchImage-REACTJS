@@ -146,11 +146,6 @@ select {
 
 .search-header .dropdown-selection {
     box-shadow: 0px 8px 1px -5px rgb(185, 167, 185);
-    /* margin-top: 2vh; */
-}
-
-.search-header .query-input {
-    /* margin-top: 5vh; */
 }
 
 .search-header .input-field {
