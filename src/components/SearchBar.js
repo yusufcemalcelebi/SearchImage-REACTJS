@@ -1,7 +1,5 @@
 import React from "react"
-
 import { Link } from "react-router-dom";
-
 
 function SearchBar(props) {
     const textFields = props.textFields
@@ -12,29 +10,33 @@ function SearchBar(props) {
     return (
         <div className="search-bar">
             <input
+                name="queryKeyword"
+                className="query-input input-field"
                 value={props.values.queryKeyword}
                 onChange={props.handleChange}
                 type="text"
                 spellCheck="false"
                 autoComplete="off"
-                name="queryKeyword"
-                className="query-input input-field"
-                placeholder="Query">
+                placeholder="Query"
+            >
             </input>
 
             <select
+                name="optionSelection"
+                className="dropdown-selection input-field"
                 value={props.values.optionSelection}
                 onChange={props.handleChange}
-                name="optionSelection"
-                className="dropdown-selection input-field">
+            >
                 <option value="" hidden>Collections</option>
                 {options}
             </select>
 
             <Link
+                className="search-button"
                 to="/search"
                 onClick={props.handleSearch}
-                className="search-button">{textFields.buttonText}
+            >
+                {textFields.buttonText}
             </Link>
         </div>
     )

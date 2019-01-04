@@ -36,7 +36,8 @@ class App extends React.Component {
     handleSearch() {
         const endPointUrl =
             "https://api.unsplash.com/search/photos?query=" + encodeURIComponent(this.state.queryKeyword) +
-            "&collections=" + this.state.optionSelection + "&page=1";
+            "&collections=" + this.state.optionSelection +
+            "&page=1";
 
         fetch(endPointUrl, {
             'method': 'get',
@@ -56,12 +57,25 @@ class App extends React.Component {
     handleImageClick(id) {
         let clickedImageInfo = this.state.apiResponse.find(image => image.id === id)
 
-        this.setState({
-            clickedImageInfo: {
-                visibility: true,
-                info: clickedImageInfo
-            }
+        //When clicked to and image, We are getting spesific image info from API
+        fetch('https://api.unsplash.com/photos/' + clickedImageInfo.id, {
+            'method': 'get',
+            'Accept-Version': 'v1',
+            headers: new Headers({
+                'Authorization': 'Client-ID ef0777b2d8ae3f437cc7b389231aee62e5c5710f8c43cbc144f26771e0d62708',
+            }),
         })
+            .then(response => response.json())
+            .then(singleImageResult => {
+                clickedImageInfo.imageLocation = singleImageResult.location || {}
+
+                this.setState({
+                    clickedImageInfo: {
+                        visibility: true,
+                        info: clickedImageInfo
+                    }
+                })
+            })
     }
 
     handleOverlayClick() {
@@ -75,7 +89,7 @@ class App extends React.Component {
 
     getImageUrls() {
         let imagesWithIds = []
-        imagesWithIds = this.state.apiResponse.map((image, index) => {
+        imagesWithIds = this.state.apiResponse.map((image) => {
             return {
                 id: image.id,
                 imgUrl: image.urls.small

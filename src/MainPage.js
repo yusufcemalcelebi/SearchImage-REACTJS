@@ -15,6 +15,7 @@ function MainPage(props) {
             <div className="search-design">
                 <div className="main-icon">
                     <img src={mainIcon} alt="" />
+                    <div className="point"></div>
                 </div>
                 <span
                     className="main-title">
